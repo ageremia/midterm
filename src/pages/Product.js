@@ -1,9 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import axios from 'axios';
 import { Link, useParams } from "react-router-dom";
 import Loading from "../components/Loading";
+import { ThemeContext } from '../context/themeContext';
 
 const Product = () => {
+
+    const { theme } = useContext(ThemeContext);
 
     const { product_id } = useParams();
 
@@ -27,13 +30,13 @@ const Product = () => {
              {product ? (
                 <div className="product">
                     <img src={product.image} alt={product.id} height="400"></img>
-                    <div>
-                        <h1>{product.title}</h1>
+                    <div style={{ color: theme.foreground }}>
+                        <h1 >{product.title}</h1>
                         {product.category}
                         <br></br><br></br>
                         {product.description}
                         <br></br><br></br>
-                        <Link to="/products">
+                        <Link to="/products" style={{ color: theme.foreground }}>
                             <button>Go Back</button>
                         </Link>
                         
