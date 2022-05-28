@@ -1,6 +1,10 @@
 import React from 'react';
 
-const ToggleSwitch = ({ onToggle }) => {
+interface Props {
+  onToggle: Function
+}
+
+const ToggleSwitch = ({ onToggle }: Props) => {
   return (
     <>
       <label className="switch">

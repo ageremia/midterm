@@ -13,5 +13,5 @@ export const themes = {
 
 // Let our context know what properties to expect
 export const ThemeContext = React.createContext({
-theme: {},
+  theme: {},
 });
