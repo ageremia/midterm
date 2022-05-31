@@ -1,41 +1,30 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import Loading from '../components/Loading';
-import ProductCard from '../components/productCard';
+import React  from 'react';
+import Spinner from '../components/Spinner';
+import ProductCard from '../components/productCard.tsx';
+import useFetchProducts from '../hooks/products/useFetchProducts';
 
 
 const Products = () => {
 
-    const [products, setProducts] = useState([]);
+    const { data: products, loading, error } = useFetchProducts();
 
-    useEffect(() => {
-      const getData = async () => {
-        try {
-          const response = await axios.get('http://localhost:3000/products/');
-          setProducts(response.data);
-        } catch (error) {
-          console.log('An error ocurred:', error);
-        }
-      };
-  
-      getData();
-    }, []);
+    if (loading) return <Spinner />;
+
+    if (error) {
+      return <p>There was an error</p>;
+    }
 
     return (
         <>
-            {products.length ? (
+            {products.length && (
                 products.map((product) => {
                     return (
                        <ProductCard card={product} key={product.id}></ProductCard>
                     );
                 })
-            ) : (
-                <Loading/>
             )}
         </>
     )
-
-
 
 }
 
